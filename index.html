@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catálogo de Produtos - Leonardo A Verza</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Font Awesome (ícones) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-icon">LV</div>
+                    <div class="logo-text">
+                        <h1>Catálogo de Produtos</h1>
+                        <p>LEONARDO A VERZA - LTDA</p>
+                    </div>
+                </div>
+                <button class="btn-primary" id="btnAdicionar">
+                    <i class="fas fa-plus"></i>
+                    Adicionar Peça
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <div class="table-container">
+                <div class="table-wrapper">
+                    <table id="tabelaProdutos">
+                        <thead>
+                            <tr>
+                                <th>ITEM</th>
+                                <th>PRODUTO/SERVIÇO</th>
+                                <th>DESCRIÇÃO TÉCNICA</th>
+                                <th>MARCA</th>
+                                <th>MODELO</th>
+                                <th>LINK</th>
+                                <th class="text-center">AÇÕES</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaBody">
+                            <!-- Produtos serão inseridos aqui via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <span>Total de peças: <strong id="totalPecas">0</strong></span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <h4>LEONARDO A VERZA - LTDA</h4>
+                    <p>CNPJ: 07.460.912/0002-76</p>
+                    <p>IE: 258.870.222</p>
+                </div>
+                <div>
+                    <h4>Endereço</h4>
+                    <p>Rua Pedro Mazurechen, 133</p>
+                    <p>89.400-000 – Porto União-SC</p>
+                </div>
+                <div>
+                    <h4>Contato</h4>
+                    <p>(42) 3523-2535</p>
+                    <p>lvinformaticafilial@gmail.com</p>
+                    <p>lvlicitacaofilial@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="anoAtual"></span> LEONARDO A VERZA - LTDA - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Adicionar -->
+    <div class="modal" id="modalAdicionar">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Adicionar Nova Peça</h2>
+                <button class="modal-close" id="modalFechar">&times;</button>
+            </div>
+            <form id="formAdicionar">
+                <div class="form-group">
+                    <label for="inputNome">Produto/Serviço *</label>
+                    <input type="text" id="inputNome" placeholder="Ex: Processador Intel i7" required />
+                </div>
+                <div class="form-group">
+                    <label for="inputDescricao">Descrição Técnica</label>
+                    <input type="text" id="inputDescricao" placeholder="Especificações técnicas" />
+                </div>
+                <div class="form-group">
+                    <label for="inputMarca">Marca</label>
+                    <input type="text" id="inputMarca" placeholder="Ex: Intel, ASUS, Samsung" />
+                </div>
+                <div class="form-group">
+                    <label for="inputModelo">Modelo</label>
+                    <input type="text" id="inputModelo" placeholder="Número do modelo" />
+                </div>
+                <div class="form-group">
+                    <label for="inputLink">Link para Conferência</label>
+                    <input type="url" id="inputLink" placeholder="https://www.exemplo.com" />
+                </div>
+                <div class="form-group">
+                    <label for="inputCategoria">Categoria</label>
+                    <select id="inputCategoria">
+                        <option value="PROCESSADOR">PROCESSADOR</option>
+                        <option value="PLACA MÃE">PLACA MÃE</option>
+                        <option value="ARMAZENAMENTO">ARMAZENAMENTO</option>
+                        <option value="MEMÓRIA RAM">MEMÓRIA RAM</option>
+                        <option value="FONTE">FONTE</option>
+                        <option value="GABINETE">GABINETE</option>
+                        <option value="PLACA DE VÍDEO">PLACA DE VÍDEO</option>
+                        <option value="MONITOR">MONITOR</option>
+                        <option value="PERIFÉRICOS">PERIFÉRICOS</option>
+                        <option value="REDE">REDE</option>
+                        <option value="SOFTWARE">SOFTWARE</option>
+                        <option value="SERVIÇOS">SERVIÇOS</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="btnCancelar">Cancelar</button>
+                    <button type="submit" class="btn-primary">Adicionar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Confirmar Remoção -->
+    <div class="modal" id="modalRemover">
+        <div class="modal-content modal-confirm">
+            <div class="modal-header">
+                <h2>Confirmar Remoção</h2>
+                <button class="modal-close" id="modalRemoverFechar">&times;</button>
+            </div>
+            <p>Tem certeza que deseja remover esta peça do catálogo?</p>
+            <p class="text-muted">Esta ação não pode ser desfeita.</p>
+            <div class="form-actions">
+                <button type="button" class="btn-secondary" id="btnRemoverCancelar">Cancelar</button>
+                <button type="button" class="btn-danger" id="btnRemoverConfirmar">Remover</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
